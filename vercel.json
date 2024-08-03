@@ -5,7 +5,11 @@
   ],
   "routes": [
     { "src": "/(.*)", "dest": "/app.py" }
-  ]
+  ],
+
+  "framework": "nextjs"
+
 }
+
 
 
