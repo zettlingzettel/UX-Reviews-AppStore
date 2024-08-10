@@ -1,5 +1,5 @@
 #!/bin/sh
-'''exec' "/Users/annasmolenova/Documents/Big Data/Big Data Course 3/my_flask_app/venv/bin/python3.11" "$0" "$@"
+'''exec' "/Users/annasmolenova/Documents/Big Data/Big Data Course 3/my_flask_app/venv/bin/python" "$0" "$@"
 ' '''
 # -*- coding: utf-8 -*-
 import re
