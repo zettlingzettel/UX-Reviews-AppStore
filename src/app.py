@@ -68,7 +68,7 @@ def app_health_checker(database):
     except Exception as e:
         return f"App is not healthy, Error: {str(e)}", 500
 
-@app.route('/app', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
     page = """
     <!DOCTYPE html>
