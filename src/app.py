@@ -4,11 +4,12 @@ import pandas as pd
 import numpy as np
 import json
 from flask import jsonify
-import pytextrank
+
 from flask import Flask, render_template, request, current_app
 import sqlite3
 import requests
 import spacy
+import pytextrank
 import time
 nlp = spacy.load("en_core_web_sm")
 
