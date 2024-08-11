@@ -19,9 +19,8 @@ nlp = spacy.load("en_core_web_sm")
 app = Flask(__name__)
 
 
-@app.route('/git_update', methods=['POST']
-
-    def webhook():
+@app.route('/git_update', methods=['POST'])
+def webhook():
     # repo = git.Repo('https://github.com/zettlingzettel/UX-Reviews-AppStore')
     #
     # origin = repo.remotes.origin
