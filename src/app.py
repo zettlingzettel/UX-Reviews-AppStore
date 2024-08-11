@@ -96,7 +96,7 @@ def index():
         <title>App Store Review Search</title>
     </head>
     <body>
-        <h1>Search for App Store Apps</h1>
+        <h1>Search for App Store Apps 123</h1>
         <form action="/search" method="POST">
             <p>What's app id?</p>
             <p>Examples: Genshin Impact - 1517783697; Obsidian - 1557175442; Formula 1 app - 835022598</p>
@@ -194,7 +194,7 @@ def analysis(reviews):
                    <title>Reviews</title>
                </head>
                <body>
-                   <h1>Reviews Analyzed - 123</h1>
+                   <h1>Reviews Analyzed</h1>
                    {html_analyzed_data}
                </body>
                </html>
