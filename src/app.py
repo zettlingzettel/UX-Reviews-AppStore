@@ -27,7 +27,7 @@ def git_update():
     #                  origin.refs.main).set_tracking_branch(origin.refs.main).checkout()
     # origin.pull()
     if request.method == 'POST':
-        repo = git.Repo('path/to/git_repo')
+        repo = git.Repo('./UX-Reviews-AppStore')
         origin = repo.remotes.origin
     origin.pull()
     return '', 200
