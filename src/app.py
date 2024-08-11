@@ -54,7 +54,7 @@ app = Flask(__name__)
     if request.method == 'POST':
         repo = git.Repo('https://github.com/zettlingzettel/UX-Reviews-AppStore')
         origin = repo.remotes.origin
-        origin.pull()
+    origin.pull()
     return '', 200
 
 
