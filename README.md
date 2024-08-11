@@ -4,12 +4,14 @@
 - performs a text analysis identifying the keywords in each review
 
 <u>Instructions for running the application:</u>
+Deactivate .venv if it is running with
+```deactivate```
 
 Activate venv with
 ```source venv/bin/activate```
 
 Export the app with
-``` export FLASK_APP=src/app.py```
+```export FLASK_APP=src/app.py```
 
 Run the app with
 ```flask run```
