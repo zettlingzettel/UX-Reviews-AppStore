@@ -19,15 +19,30 @@ nlp = spacy.load("en_core_web_sm")
 app = Flask(__name__)
 
 
-@app.route('/git_update', methods=['POST'])
-def webhook():
-    if request.method == 'POST':
-        repo = git.Repo('https://github.com/zettlingzettel/UX-Reviews-AppStore')
-        origin = repo.remotes.origin
-        origin.pull()
-        return 'Updated PythonAnywhere successfully', 200
-    else:
-        return 'Wrong event type', 400
+@app.route('/git_update', methods=['POST']
+
+    def webhook():
+    repo = git.Repo('https://github.com/zettlingzettel/UX-Reviews-AppStore')
+
+    origin = repo.remotes.origin
+    origin.pull()
+    # if len(pull_info) == 0:
+    #     return json.dumps({'msg': "Didn't pull any information from remote!"})
+    # if pull_info[0].flags > 128:
+    #     return json.dumps({'msg': "Didn't pull any information from remote!"})
+    #
+    # commit_hash = pull_info[0].commit.hexsha
+    # build_commit = f'build_commit = "{commit_hash}"'
+    # print(f'{build_commit}')
+    # return 'Updated PythonAnywhere server to commit {commit}'.format(commit=commit_hash)
+
+    #     if request.method == 'POST':
+    #         repo = git.Repo('https://github.com/zettlingzettel/UX-Reviews-AppStore')
+    #         origin = repo.remotes.origin
+    # origin.pull()
+    # return 'Updated PythonAnywhere successfully', 200
+    #     else:
+    #         return 'Wrong event type', 400
 # def git_update():
 #     repo = git.Repo('https://github.com/zettlingzettel/UX-Reviews-AppStore')
 #     origin = repo.remotes.origin
