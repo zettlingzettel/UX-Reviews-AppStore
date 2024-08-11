@@ -51,7 +51,7 @@ def webhook():
 #
 #
     if request.method == 'POST':
-        repo = git.Repo('https://github.com/zettlingzettel/UX-Reviews-AppStore')
+        repo = git.Repo('./UX-Reviews-AppStore')
         origin = repo.remotes.origin
     origin.pull()
     return '', 200
