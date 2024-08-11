@@ -1,3 +1,4 @@
+import os
 import sys
 
 project_home = '/home/sillybilly777/UX-Reviews-AppStore'
