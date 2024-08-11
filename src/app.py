@@ -194,7 +194,7 @@ def analysis(reviews):
                    <title>Reviews</title>
                </head>
                <body>
-                   <h1>Reviews Analyzed</h1>
+                   <h1>Reviews Analyzed - 123</h1>
                    {html_analyzed_data}
                </body>
                </html>
