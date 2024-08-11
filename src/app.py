@@ -22,10 +22,10 @@ app = Flask(__name__)
 @app.route('/git_update', methods=['POST']
 
     def webhook():
-    repo = git.Repo('https://github.com/zettlingzettel/UX-Reviews-AppStore')
-
-    origin = repo.remotes.origin
-    origin.pull()
+    # repo = git.Repo('https://github.com/zettlingzettel/UX-Reviews-AppStore')
+    #
+    # origin = repo.remotes.origin
+    # origin.pull()
     # if len(pull_info) == 0:
     #     return json.dumps({'msg': "Didn't pull any information from remote!"})
     # if pull_info[0].flags > 128:
@@ -51,11 +51,11 @@ app = Flask(__name__)
 #     origin.pull()
 #
 #
-#     # if request.method == 'POST':
-#     #     repo = git.Repo('https://github.com/zettlingzettel/UX-Reviews-AppStore')
-#     #     origin = repo.remotes.origin
-#     # origin.pull()
-#     return '', 200
+    if request.method == 'POST':
+        repo = git.Repo('https://github.com/zettlingzettel/UX-Reviews-AppStore')
+        origin = repo.remotes.origin
+        origin.pull()
+    return '', 200
 
 
 app_health = {"Health": ""}
