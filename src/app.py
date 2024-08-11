@@ -169,10 +169,6 @@ def analysis(reviews):
 
             html_analyzed_data += analyzed_text_str_total
 
-            # print(f"Review: {analyzed_text_str}")
-            # print(f"Keywords: {analyzed_text_keywords}")
-            # print()
-
         html_analyzed = f"""
                <!DOCTYPE html>
                <html>
