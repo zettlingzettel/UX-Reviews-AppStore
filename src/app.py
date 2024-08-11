@@ -11,7 +11,8 @@ import requests
 import spacy
 import pytextrank
 import time
-from git import Repo
+import git
+# from git import Repo
 
 nlp = spacy.load("en_core_web_sm")
 
