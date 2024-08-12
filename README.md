@@ -34,3 +34,4 @@ To run unit tests go to the `/src/tests` folder and run
 To run integration tests go to the `/src/tests` folder and run
 ```python -m test_all_integration_tests```
 
+Automatic testing is implemented on github
