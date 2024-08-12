@@ -25,4 +25,4 @@ jobs:
       - name: Run Tests
         run: |
           cd src/tests
-          make unit
+          python -m test_all_unit_tests
