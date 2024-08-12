@@ -12,7 +12,6 @@ import spacy
 import pytextrank
 import time
 import git
-# from git import Repo
 
 nlp = spacy.load("en_core_web_sm")
 
@@ -21,35 +20,6 @@ app = Flask(__name__)
 
 @app.route('/git_update', methods=['POST'])
 def webhook():
-    # repo = git.Repo('https://github.com/zettlingzettel/UX-Reviews-AppStore')
-    #
-    # origin = repo.remotes.origin
-    # origin.pull()
-    # if len(pull_info) == 0:
-    #     return json.dumps({'msg': "Didn't pull any information from remote!"})
-    # if pull_info[0].flags > 128:
-    #     return json.dumps({'msg': "Didn't pull any information from remote!"})
-    #
-    # commit_hash = pull_info[0].commit.hexsha
-    # build_commit = f'build_commit = "{commit_hash}"'
-    # print(f'{build_commit}')
-    # return 'Updated PythonAnywhere server to commit {commit}'.format(commit=commit_hash)
-
-    #     if request.method == 'POST':
-    #         repo = git.Repo('https://github.com/zettlingzettel/UX-Reviews-AppStore')
-    #         origin = repo.remotes.origin
-    # origin.pull()
-    # return 'Updated PythonAnywhere successfully', 200
-    #     else:
-    #         return 'Wrong event type', 400
-# def git_update():
-#     repo = git.Repo('https://github.com/zettlingzettel/UX-Reviews-AppStore')
-#     origin = repo.remotes.origin
-#     repo.create_head('main',
-#                      origin.refs.main).set_tracking_branch(origin.refs.main).checkout()
-#     origin.pull()
-#
-#
     if request.method == 'POST':
         repo = git.Repo('./UX-Reviews-AppStore')
         origin = repo.remotes.origin
@@ -122,7 +92,7 @@ def index():
     <body>
         <h1>Search for App Store Apps</h1>
         <form action="/search" method="POST">
-            <p>What's app id?</p>
+            <p>What's app id? 123</p>
             <p>Examples: Genshin Impact - 1517783697; Obsidian - 1557175442; Formula 1 app - 835022598</p>
             <p>You can find App Store app id in app's url (e.g. https://apps.apple.com/us/app/formula-1/id<b><u>835022598</u></b>)</p> 
             <input name="appid" id="appid" type="text" /><br>
