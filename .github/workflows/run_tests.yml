@@ -22,7 +22,12 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-      - name: Run Tests
+      - name: Run Unit Tests
         run: |
           cd src/tests
           python -m test_all_unit_tests
+      - name: Run Integration Tests
+        run: |
+          cd src/tests
+          python -m test_all_unit_tests
+          python -m test_all_integration_tests
