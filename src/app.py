@@ -18,10 +18,6 @@ nlp = spacy.load("en_core_web_sm")
 
 app = Flask(__name__)
 
-# from prometheus_flask_exporter import PrometheusMetrics
-# metrics_prometheus = PrometheusMetrics(app)
-# metrics_prometheus.info('app_info', 'Application info', version='1.0.3')
-
 @app.route('/git_update', methods=['POST'])
 def webhook():
     if request.method == 'POST':
@@ -88,20 +84,20 @@ def app_health_checker(database):
 @app.route('/', methods=['GET', 'POST'])
 
 def index():
-    connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
-    global channel
-    channel = connection.channel()
-    channel.queue_declare(queue='reviews', passive = True)
-
-    def callback(ch, method, properties, body):
-        body = json.loads(body)
-        print(" [x] Received %r" % body)
-
-        channel.basic_consume(queue='reviews', on_message_callback=callback, auto_ack=True)
-
-    # print(' [*] Waiting for messages. To exit press CTRL+C')
-    # print('Messages in queue %d' % res.method.message_count)
-        channel.start_consuming()
+    # Please uncomment to run rabbitmq locally (message queues are not supported on PythonAnywhere at the moment)
+    # connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+    # global channel
+    # channel = connection.channel()
+    # channel.queue_declare(queue='reviews', passive = True)
+    #
+    # def callback(ch, method, properties, body):
+    #     body = json.loads(body)
+    #     print(" [x] Received %r" % body)
+    #
+    #     channel.basic_consume(queue='reviews', on_message_callback=callback, auto_ack=True)
+    #
+    #     channel.start_consuming()
+    # Please uncomment to run rabbitmq locally (message queues are not supported on PythonAnywhere at the moment)
 
     global response
 
@@ -144,11 +140,13 @@ def api_call():
     reviews = []
     # if request.method == 'POST':
     app_id = request.form.get("appid", "")
-    if app_id:
-        channel.basic_publish(exchange='direct',
-                              routing_key='reviews',
-                              body=app_id)
-        print("message sent")
+    # Please uncomment to run rabbitmq locally (message queues are not supported on PythonAnywhere at the moment)
+    # if app_id:
+    #     channel.basic_publish(exchange='direct',
+    #                           routing_key='reviews',
+    #                           body=app_id)
+    #     print("message sent")
+    # Please uncomment to run rabbitmq locally (message queues are not supported on PythonAnywhere at the moment)
 
 
 
@@ -243,21 +241,6 @@ def define_metrics():
     }
     return metrics
 
-# metrics_prometheus.register_default(
-#     metrics_prometheus.counter(
-#         'by_path_counter', 'Request count by request paths',
-#         labels={'path': lambda: request.path}
-#     )
-# )
 
 if __name__ == "__main__":
     app.run(debug=False)
-    # try:
-    #     main()
-    # except KeyboardInterrupt:
-    #     print('Interrupted')
-    #     try:
-    #         sys.exit(0)
-    #     except SystemExit:
-    #         os._exit(0)
-
