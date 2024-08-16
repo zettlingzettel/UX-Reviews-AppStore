@@ -1,0 +1,28 @@
+#version: "3"
+#services:
+#  prometheus:
+#    network_mode: host
+#    container_name: prometheus
+#    image: prom/prometheus
+#    volumes:
+#      - ./config-debug.yml:/etc/prometheus/prometheus.yml
+
+version: '2'
+services:
+  prometheus_app:
+    container_name: prometheus
+    build:
+      context: .
+      dockerfile: /Dockerfile
+    restart: 'on-failure'
+    ports:
+      - 5000:5000
+  prometheus:
+    image: prom/prometheus: latest
+    restart: always
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+  command:
+  - '--config.file=/etc/prometheus/prometheus.yml'
+  ports:
+  - 9090:9090
