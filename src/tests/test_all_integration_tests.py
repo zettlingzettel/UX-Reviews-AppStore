@@ -42,5 +42,13 @@ class TestDir(unittest.TestCase):
 
         self.assertTrue(result_db_test2 != None)
 
+        mock_name = app.database_name
+        data = {}
+        table_name_test = "TEST-TABLE-1"
+        expected = "Database is not empty", 200
+
+        self.assertTrue(app.app_health_checker(mock_name) == expected,
+                        app.save_to_database(data, table_name_test) == None)
+
 if __name__ == '__main__':
     unittest.main()

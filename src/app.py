@@ -2,7 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 import json
 import pandas as pd
 import numpy as np
-import json
+import json, pika
 from flask import jsonify
 
 from flask import Flask, render_template, request, current_app
@@ -13,10 +13,14 @@ import pytextrank
 import time
 import git
 
+
 nlp = spacy.load("en_core_web_sm")
 
 app = Flask(__name__)
 
+# from prometheus_flask_exporter import PrometheusMetrics
+# metrics_prometheus = PrometheusMetrics(app)
+# metrics_prometheus.info('app_info', 'Application info', version='1.0.3')
 
 @app.route('/git_update', methods=['POST'])
 def webhook():
@@ -82,7 +86,28 @@ def app_health_checker(database):
         return f"App is not healthy, Error: {str(e)}", 500
 
 @app.route('/', methods=['GET', 'POST'])
+
 def index():
+    connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+    global channel
+    channel = connection.channel()
+    channel.queue_declare(queue='reviews', passive = True)
+
+    def callback(ch, method, properties, body):
+        body = json.loads(body)
+        print(" [x] Received %r" % body)
+
+        channel.basic_consume(queue='reviews', on_message_callback=callback, auto_ack=True)
+
+    # print(' [*] Waiting for messages. To exit press CTRL+C')
+    # print('Messages in queue %d' % res.method.message_count)
+        channel.start_consuming()
+
+    global response
+
+
+
+
     page = """
     <!DOCTYPE html>
     <html>
@@ -117,8 +142,15 @@ def api_call():
     global reviews_text
     reviews_text = []
     reviews = []
+    # if request.method == 'POST':
+    app_id = request.form.get("appid", "")
+    if app_id:
+        channel.basic_publish(exchange='direct',
+                              routing_key='reviews',
+                              body=app_id)
+        print("message sent")
 
-    global response
+
 
     url_address = "https://itunes.apple.com/us/rss/customerreviews/page=1/id=" + str(
         app_id) + "/sortBy=mostRecent/json"
@@ -151,8 +183,6 @@ def search():
         app_health["Health"] = app_health_checker(database_name)
         analysed_data = analysis(reviews)
         return analysed_data
-
-
 
 
 def analysis(reviews):
@@ -197,12 +227,6 @@ def analysis(reviews):
     return html_analyzed
 
 
-
-
-
-
-
-
 @app.route('/database_data')
 def database_data():
     return db_results
@@ -210,7 +234,7 @@ def database_data():
 def health_check_function():
     return app_health
 
-@app.route('/metrics')
+@app.route('/metrics_data')
 def define_metrics():
     metrics= {
         "requests": app_metrics["requests"],
@@ -219,9 +243,21 @@ def define_metrics():
     }
     return metrics
 
+# metrics_prometheus.register_default(
+#     metrics_prometheus.counter(
+#         'by_path_counter', 'Request count by request paths',
+#         labels={'path': lambda: request.path}
+#     )
+# )
 
 if __name__ == "__main__":
     app.run(debug=False)
-
-
+    # try:
+    #     main()
+    # except KeyboardInterrupt:
+    #     print('Interrupted')
+    #     try:
+    #         sys.exit(0)
+    #     except SystemExit:
+    #         os._exit(0)
 
