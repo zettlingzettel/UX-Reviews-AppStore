@@ -119,6 +119,7 @@ To stop containers:
 Only the grafana & the prometheus need the dockerfile in order to run.
 
 <h2>Whiteboard Architecture:</h2>
+![Whiteboard Architecture.png](https://github.com/zettlingzettel/UX-Reviews-AppStore/blob/main/WhiteboardArchitecture.png)
 ![WhiteboardArchitecture.png](WhiteboardArchitecture.png)
 
 1. User sends the post request from the HTML front-end using the form.
