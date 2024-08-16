@@ -117,7 +117,7 @@ def index():
     <body>
         <h1>Search for App Store Apps</h1>
         <form action="/search" method="POST">
-            <p>What's app id? 123</p>
+            <p>What's app id?</p>
             <p>Examples: Genshin Impact - 1517783697; Obsidian - 1557175442; Formula 1 app - 835022598</p>
             <p>You can find App Store app id in app's url (e.g. https://apps.apple.com/us/app/formula-1/id<b><u>835022598</u></b>)</p> 
             <input name="appid" id="appid" type="text" /><br>
